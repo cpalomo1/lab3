@@ -14,7 +14,7 @@
                     Gender:      <input type="radio" name="gender" value="m"> Male
                                  <input type="radio" name="gender" value="f"> Female<br><br>
                                  
-                    Zip Code:    <input type="text" name="zip" id="zip"><br>
+                    Zip Code:    <input type="text" name="zip" id="zip"> <span id="zipError" class="alert-danger"></span><br><br>
                     City:        <span id="city"></span><br>
                     Latitude:    <span id="latitude"></span><br>
                     Longitude:   <span id="longitude"></span><br><br>
@@ -53,11 +53,21 @@
                         success: function(result,status) {
   
                         //alert(result);
+                        $("#zipError").html("");
+                        
+                        if(result==false) {
+                            $("#zipError").html("Zip code was not found!");
+                            $("#city").html("");
+                            $("#latitude").html("");
+                            $("#longitude").html("");
+                        }
+                        
                         $("#city").html(result.city);
                         $("#latitude").html(result.latitude);
                         $("#longitude").html(result.longitude);
  
-                        } 
+                        }
+
                     });//ajax
                 });//zip
                 
